@@ -47,8 +47,15 @@ const Hypno = () => {
       // Width/height of layers
       layerSize = radius * 0.3,
       // Layers that overlap to create the infinity illusion
-      layerOverlap = Math.round(quality * 0.1);
+      layerOverlap = Math.round(quality * 0.1),
+      colorBlack = getComputedStyle(document.documentElement).getPropertyValue(
+        "--black"
+      ),
+      colorWhite = getComputedStyle(document.documentElement).getPropertyValue(
+        "--white"
+      );
 
+    console.log(colorBlack);
     // Takes a step in the simulation
     const step = () => {
       for (let i = 0, len = layers.length; i < len; i++) {
@@ -111,12 +118,12 @@ const Hypno = () => {
 
       // No stroke if this is a mask
       if (!mask) {
-        context.strokeStyle = "#000";
+        context.strokeStyle = colorBlack;
         context.lineWidth = 1;
         context.strokeRect(-size2, -size2, size, size);
       }
 
-      context.fillStyle = "#fff";
+      context.fillStyle = colorWhite;
       context.fillRect(-size2, -size2, size, size);
     };
 

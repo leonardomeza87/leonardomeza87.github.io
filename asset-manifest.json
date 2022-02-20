@@ -1,18 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.85e3b86c.css",
-    "main.js": "/static/js/main.36e64975.js",
+    "main.css": "/static/css/main.e3bfe992.css",
+    "main.js": "/static/js/main.8ab81524.js",
     "static/media/logo.svg": "/static/media/logo.64b5419536db9d9fdfd73976a704105f.svg",
     "index.html": "/index.html",
     "static/media/logo-github.svg": "/static/media/logo-github.080591513b1a3eb8fdfe0257830eaff1.svg",
     "static/media/logo-twitter.svg": "/static/media/logo-twitter.62976c081dee9df5e089714a43f81083.svg",
     "static/media/logo-linkedin.svg": "/static/media/logo-linkedin.9ab1461c9a828786baf729f786e1c2f3.svg",
-    "static/media/wave.svg": "/static/media/wave.50b526ec905011c48a45.svg",
-    "main.85e3b86c.css.map": "/static/css/main.85e3b86c.css.map",
-    "main.36e64975.js.map": "/static/js/main.36e64975.js.map"
+    "static/media/wave.svg": "/static/media/wave.e9af1c626603e8e6b155.svg",
+    "static/media/markdown.svg": "/static/media/markdown.fa70ee3fe316a268a37b.svg",
+    "static/media/chevron-down.svg": "/static/media/chevron-down.8261387b46a4e157bdf658369adba2ce.svg",
+    "static/media/close.svg": "/static/media/close.49ba6b16c4e11db06728.svg",
+    "main.e3bfe992.css.map": "/static/css/main.e3bfe992.css.map",
+    "main.8ab81524.js.map": "/static/js/main.8ab81524.js.map"
   },
   "entrypoints": [
-    "static/css/main.85e3b86c.css",
-    "static/js/main.36e64975.js"
+    "static/css/main.e3bfe992.css",
+    "static/js/main.8ab81524.js"
   ]
 }

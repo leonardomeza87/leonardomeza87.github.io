@@ -1,6 +1,5 @@
 .hero {
-  height: 100%;
-  min-height: 100vh;
+  height: calc(100vh - 5rem);
   width: 100%;
 
   background-color: var(--white);
@@ -12,167 +11,240 @@
   position: relative;
   overflow: hidden;
 
-  .container {
-    height: 100%;
-    min-height: 100vh;
+  & > .container {
     width: 100%;
-    max-width: 1200px;
+    padding: 0 4rem;
 
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
 
-    .content {
+    .inner-container {
+      height: 100%;
+      width: 100%;
+      max-width: 75rem;
+
+      margin-top: -1rem;
+
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      justify-content: space-between;
+      align-items: center;
+
       position: relative;
-      z-index: 20;
+      z-index: 10;
 
-      p {
-        font-size: 24px;
-        line-height: 32px;
-        margin-bottom: 0.5rem;
-        text-transform: capitalize;
-      }
+      .text {
+        margin-top: -1rem;
 
-      h1 {
-        font-size: 72px;
-        line-height: 80px;
-        margin-bottom: 0.5rem;
-      }
-
-      span {
-        font-size: 20px;
-        line-height: 28px;
-        margin-bottom: 2rem;
-      }
-
-      .downloads {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        position: relative;
+        z-index: 20;
 
-        margin-bottom: 1rem;
+        p {
+          font-size: var(--f-regular-l);
+          line-height: var(--f-large-s);
+          margin-bottom: 0.5rem;
+          text-transform: capitalize;
+        }
 
-        button {
-          width: 9rem;
-          padding: 1rem;
-          border: 2px solid var(--black);
-          background-color: transparent;
+        h1 {
+          font-size: 72px;
+          line-height: 80px;
+          margin-bottom: 0.5rem;
+        }
 
-          cursor: pointer;
-          font-weight: 400;
+        & > span {
+          font-size: var(--f-regular-s);
+          line-height: var(--f-medium-m);
+          margin-bottom: 2rem;
+        }
 
-          transition-property: color, background-color;
-          transition-duration: 0.2s;
-          transition-timing-function: ease-in-out;
+        .cta {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
 
-          &:hover {
-            transition: none;
-            background-color: var(--black);
-            color: var(--white);
-          }
+          margin-bottom: 1rem;
 
-          &:first-child {
-            margin-right: 1rem;
-            background-color: var(--black);
-            color: var(--white);
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            &:hover {
-              background-color: transparent;
-              color: var(--black);
+            height: 48px;
+            padding: 0 1rem;
+
+            border: 2px solid var(--dark-blue);
+            background-color: transparent;
+
+            cursor: pointer;
+
+            transition-property: color, background-color;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+
+            svg {
+              height: 24px;
+              margin-right: 0.5rem;
+              fill: #fff;
+              transform: translateY(-2px);
+              transition: fill 0.2s ease-in-out;
+            }
+
+            span {
+              font-weight: 500;
+              font-size: var(--f-small-m);
+              line-height: var(--f-small-m);
+              transition: color 0.2s ease-in-out;
+            }
+
+            &:hover,
+            &:focus {
+              transition: none;
+              background-color: var(--dark-blue);
+              color: var(--white);
+            }
+
+            &:first-child {
+              margin-right: 1rem;
+              background-color: var(--dark-blue);
+              color: var(--white);
+
+              span {
+                color: var(--white);
+                margin-right: 0.5rem;
+              }
+
+              &:hover,
+              &:focus {
+                background-color: transparent;
+                color: var(--dark-blue);
+
+                svg {
+                  transition: none;
+                  fill: var(--dark-blue);
+                }
+
+                span {
+                  transition: none;
+                  color: var(--dark-blue);
+                }
+              }
+            }
+
+            &:nth-child(2) {
+              svg {
+                margin-left: 0.5rem;
+                margin-right: 0;
+                transform: initial;
+                fill: var(--dark-blue);
+
+                path {
+                  transition: stroke 0.2s ease-in-out;
+                }
+              }
+
+              &:hover,
+              &:focus {
+                svg path {
+                  transition: none;
+                  stroke: var(--white);
+                }
+              }
             }
           }
         }
-      }
 
-      .social {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        a {
+        .social {
           display: flex;
           justify-content: center;
           align-items: center;
 
-          padding: 0.5rem;
-          margin-right: 1rem;
-          transition: background-color 0.2s ease-in-out;
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-          svg {
-            height: 24px;
-            width: 24px;
-            fill: var(--black);
-
-            transition: fill 0.2s ease-in-out;
-          }
-
-          &:hover {
-            transition: none;
-            background-color: var(--black);
+            padding: 0.5rem;
+            margin-right: 1rem;
+            transition: background-color 0.2s ease-in-out;
 
             svg {
+              height: 24px;
+              width: 24px;
+              fill: var(--dark-blue);
+
+              transition: fill 0.2s ease-in-out;
+            }
+
+            &:hover,
+            &:focus {
               transition: none;
-              fill: var(--white);
+              background-color: var(--dark-blue);
+
+              svg {
+                transition: none;
+                fill: var(--white);
+              }
             }
           }
         }
       }
+
+      .hypno {
+        position: relative;
+        z-index: 20;
+        width: var(--hypno-width);
+        height: var(--hypno-width);
+      }
     }
+  }
 
-    .canvas {
-      position: relative;
-      z-index: 20;
-      width: var(--hypno-width);
-      height: var(--hypno-width);
-    }
+  .ocean {
+    height: 5%;
+    width: 100%;
 
-    .ocean {
-      height: 5%;
-      width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--wave-dark);
 
+    .wave {
+      background: url("../../images/wave.svg") repeat-x;
       position: absolute;
-      bottom: 0;
-      left: 0;
-      background-color: var(--wave-dark);
+      top: -198px;
+      width: 6400px;
+      height: 198px;
+      animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+      transform: translate3d(0, 0, 0);
 
-      .wave {
-        background: url("../../images/wave.svg") repeat-x;
-        position: absolute;
-        top: -198px;
-        width: 6400px;
-        height: 198px;
-        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-        transform: translate3d(0, 0, 0);
-
-        &:nth-of-type(2) {
-          top: -175px;
-          animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-            swell 7s ease -1.25s infinite;
-          opacity: 1;
-        }
+      &:nth-of-type(2) {
+        top: -175px;
+        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+          swell 7s ease -1.25s infinite;
+        opacity: 1;
       }
+    }
 
-      @keyframes wave {
-        0% {
-          margin-left: 0;
-        }
-        100% {
-          margin-left: -1600px;
-        }
+    @keyframes wave {
+      0% {
+        margin-left: 0;
       }
+      100% {
+        margin-left: -1600px;
+      }
+    }
 
-      @keyframes swell {
-        0%,
-        100% {
-          transform: translate3d(0, -25px, 0);
-        }
-        50% {
-          transform: translate3d(0, 5px, 0);
-        }
+    @keyframes swell {
+      0%,
+      100% {
+        transform: translate3d(0, -25px, 0);
+      }
+      50% {
+        transform: translate3d(0, 5px, 0);
       }
     }
   }

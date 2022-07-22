@@ -1,177 +1,231 @@
 header {
-  height: 64px;
+  height: 5rem;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
+  position: relative;
 
-  background-color: #fff;
-
-  .container {
-    height: 100%;
+  & > .fixed {
+    height: 5rem;
     width: 100%;
-    max-width: 1200px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
-    .logo {
+    background-color: #fff;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    padding: 0 4rem;
+
+    & > .container {
+      height: 100%;
+      width: 100%;
+      max-width: 75rem;
+
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
 
-      svg {
-        height: 32px;
-        width: 32px;
-        fill: var(--black);
-
-        margin-right: 0.75rem;
-
-        transform: scaleX(-1);
-      }
-
-      a {
-        font-size: 18px;
-        line-height: 18px;
-        font-weight: 400;
-        font-style: italic;
-      }
-    }
-
-    nav {
-      ul {
+      .logo {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        list-style: none;
+        padding: 0.5rem;
+        margin-left: -0.5rem;
+        cursor: pointer;
 
-        li {
-          height: 44px;
+        svg {
+          height: 2rem;
+          width: 2rem;
+          fill: var(--dark-blue);
+
+          margin-right: 0.75rem;
+
+          transform: scaleX(-1);
+        }
+
+        img {
+          height: 1.1875rem;
+        }
+      }
+
+      .lang {
+        height: 2.75rem;
+        width: 7.75rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+
+        margin-right: 1rem;
+
+        button {
+          height: 2.75rem;
 
           display: flex;
           justify-content: center;
           align-items: center;
+          cursor: pointer;
+          border: none;
+          background-color: transparent;
+          padding: 0.5rem 1rem;
+          border-bottom: 0.125rem solid transparent;
 
-          position: relative;
+          font-size: var(--f-small-m);
+          line-height: var(--f-small-m);
+          font-weight: 500;
+        }
 
-          a,
-          > button {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
+        & > button {
+          justify-content: space-between;
+          padding: 0.5rem 1rem;
 
-            font-size: 16px;
-            line-height: 16px;
-            font-weight: 400;
+          height: 2.75rem;
+          width: 100%;
 
-            padding: 0.5rem 1rem;
-            margin-left: 0.5rem;
-            border: none;
-            background-color: transparent;
-            border-bottom: 2px solid transparent;
+          transition: border-color 0.2s ease-in-out;
 
-            transition: border-color 0.2s ease-in-out;
-
-            &:hover {
-              transition: none;
-              border-bottom-color: var(--black);
-            }
+          &:hover,
+          &:focus {
+            border-bottom-color: var(--dark-blue);
           }
 
-          button.active {
-            border-bottom-color: var(--black);
+          &.active {
+            border-bottom-color: var(--dark-blue);
 
             svg {
-              transform: translateY(2px) rotateX(180deg);
+              transform: translateY(0.125rem) rotateX(180deg);
             }
           }
 
-          button svg {
-            margin-left: 0.5rem;
-            height: 20px;
-            width: 20px;
-            transform: translateY(2px);
+          svg {
+            height: 1.25rem;
+            transform: translateY(0.125rem);
+            flex-shrink: 0;
 
             transition: transform 0.2s ease-in-out;
           }
-
-          .lang-menu {
-            display: none;
-
-            position: absolute;
-            top: 54px;
-
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            width: 100%;
-
-            background-color: var(--white);
-            padding: 0.5rem;
-
-            button {
-              width: 100%;
-              height: 44px;
-
-              background-color: transparent;
-              border: 2px solid var(--black);
-              cursor: pointer;
-              transition: background-color 0.2s ease-in-out;
-
-              &:first-child {
-                margin-bottom: 0.5rem;
-              }
-
-              &:hover {
-                transition: none;
-                background-color: var(--black);
-                color: var(--white);
-              }
-
-              &.active {
-                background-color: var(--black);
-                color: var(--white);
-
-                &:hover {
-                  background-color: var(--white);
-                  color: var(--black);
-                }
-              }
-            }
-
-            &.open {
-              display: flex;
-            }
-          }
         }
 
-        .contact a {
-          padding: 0.75rem 2rem;
+        &:hover .lang-menu button {
+          border-color: var(--dark-blue);
+        }
 
-          margin-left: 1.5rem;
+        .lang-menu {
+          transform: scaleY(0);
+          transform-origin: top;
 
-          border: 2px solid var(--black);
-          background-color: var(--black);
-          color: var(--white);
+          position: absolute;
+          top: 2.75rem;
 
-          transition-property: background-color, color;
-          transition-duration: 0.2s;
-          transition-timing-function: ease-in-out;
+          width: 100%;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
 
-          &:hover {
-            background-color: var(--white);
-            color: var(--black);
+          background-color: var(--white);
+          transition: transform 0.2s ease-in-out;
+
+          button {
+            width: 100%;
+
+            border: 0.125rem solid transparent;
+            border-top: none;
+
+            transition-property: background-color, color, border-color;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+
+            &:hover {
+              transition: none;
+              background-color: var(--dark-blue);
+              color: var(--white);
+            }
+          }
+
+          &.open {
+            transform: scaleY(1);
+          }
+        }
+      }
+
+      .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ul {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          li {
+            height: 2.75rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+
+            a {
+              height: 2.75rem;
+
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+
+              padding: 0.5rem 1rem;
+              border-bottom: 0.125rem solid transparent;
+
+              font-size: var(--f-small-m);
+              line-height: var(--f-small-m);
+              font-weight: 500;
+
+              padding: 0.5rem 1rem;
+              margin-left: 0.5rem;
+              border-bottom: 0.125rem solid transparent;
+
+              transition: border-color 0.2s ease-in-out;
+
+              &:hover,
+              &:focus {
+                transition: none;
+                border-bottom-color: var(--dark-blue);
+              }
+            }
+          }
+
+          .contact a {
+            padding: 0.75rem 2rem;
+
+            margin-left: 1.5rem;
+
+            border: 0.125rem solid var(--dark-blue);
+            background-color: var(--dark-blue);
+            color: var(--white);
+
+            transition-property: background-color, color;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+
+            &:hover,
+            &:focus {
+              background-color: var(--white);
+              color: var(--dark-blue);
+            }
           }
         }
       }

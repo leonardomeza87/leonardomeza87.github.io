@@ -56,6 +56,7 @@ const Editor = () => {
         }
       }
     }
+    //eslint-disable-next-line
   }, [ininitializer, text]);
 
   const handleClick = () => {
@@ -96,7 +97,7 @@ const Editor = () => {
 
           let top = rect.top + win.pageYOffset;
 
-          if (top != prevTop) {
+          if (top !== prevTop) {
             prevTop = top;
             line++;
           }

@@ -55,7 +55,6 @@ const Hypno = () => {
         "--white"
       );
 
-    console.log(colorBlack);
     // Takes a step in the simulation
     const step = () => {
       for (let i = 0, len = layers.length; i < len; i++) {

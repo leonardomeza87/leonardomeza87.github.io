@@ -28,7 +28,7 @@ const Hero = () => {
                 <span>Resume</span>
               </a>
               <a href="#portfolio">
-                Take a look at my projects
+                <span>Take a look at my projects</span>
                 <Arrow />
               </a>
             </div>

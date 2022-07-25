@@ -1,6 +1,5 @@
 import React from "react";
 
-// import Editor from "./Editor";
 import { ReactComponent as IconHTML } from "../images/logo-html5.svg";
 import { ReactComponent as IconCSS } from "../images/logo-css3.svg";
 import { ReactComponent as IconSASS } from "../images/logo-sass.svg";
@@ -10,6 +9,8 @@ import { ReactComponent as IconReact } from "../images/logo-react.svg";
 import { ReactComponent as IconGit } from "../images/logo-git.svg";
 import { ReactComponent as IconGithub } from "../images/logo-github.svg";
 
+import Editor from "./Editor";
+
 const About = () => {
   return (
     <section className="about" id="about-me">
@@ -17,9 +18,8 @@ const About = () => {
 
       <div className="content">
         <div className="container">
-          <div className="card">
-            <p>I like to eat</p>
-            {/* <span>Based in Venezuela</span> */}
+          <div className="editor-container">
+            <Editor data="Hola, esta es una prueba customizada de mi pequeño editor de texto, en el que no puedes escribir; Es más como una pizarra, que muestra, o debería mostrar, una bio sobre mí, obviamente como estamos en fases de pruebas pues todavía no he redactado esa bio xD" />
           </div>
           <div className="skills">
             <h3>I've worked with all of this:</h3>
@@ -63,7 +63,6 @@ const About = () => {
         <div className="wave"></div>
         <div className="wave"></div>
       </div>
-      {/* <Editor /> */}
     </section>
   );
 };

@@ -1,223 +1,166 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import json from "../test/data.json";
+import { ReactComponent as LogoMD } from "../images/logo-markdown.svg";
 
-const Editor = () => {
-  const [data, setData] = useState("");
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [ininitializer, setIninitializer] = useState(0);
-  const [pause, setPause] = useState(20);
+const Editor = ({ data }) => {
+  const [displayedText, setDisplayedText] = useState("");
+
+  const [letterIndex, setLetterIndex] = useState(0);
+
+  const [pauseTimeMS, setPauseTimeMS] = useState(20);
+
   const [skipAnimation, setSkipAnimation] = useState(false);
-  const [ready, setReady] = useState(true);
+
+  const [animationTimer, setAnimationTimer] = useState(0);
+  const [loaderTimer, setLoaderTimer] = useState(0);
+
+  const [loader, setLoader] = useState("/");
+
+  const textRef = useRef(null);
 
   useEffect(() => {
-    setData(json.bio);
-    setIninitializer(1);
-  }, []);
+    if (!skipAnimation) {
+      setLoaderTimer(
+        setTimeout(() => {
+          if (loader === "/") setLoader("\\");
+          else setLoader("/");
+        }, 200)
+      );
+    } else {
+      clearTimeout(loaderTimer);
+    }
+    // eslint-disable-next-line
+  }, [loader, skipAnimation]);
 
-  const [timerID, setTimerID] = useState(0);
+  const skip = () => {
+    //Cancel the timeout
+    clearTimeout(animationTimer);
+
+    //Convert semicolons to periods
+    let translatedData = data.replace(/;/g, ". \n");
+    setDisplayedText(translatedData);
+  };
 
   useEffect(() => {
+    //Data have content
     if (data.length > 0) {
-      if (index !== data.length) {
-        let char = data[index];
+      //Letter index is less than data length
+      if (letterIndex !== data.length) {
+        //Current letter
+        let char = data[letterIndex];
         let newText = "";
 
         if (char === `;`) {
           char = `. \n`;
-          setPause(2000);
+          setPauseTimeMS(2000);
         } else if (char === `.`) {
-          setPause(1000);
+          setPauseTimeMS(1000);
         } else if (char === `,`) {
-          setPause(500);
+          setPauseTimeMS(500);
         } else {
-          setPause(20);
+          setPauseTimeMS(20);
         }
 
         if (!skipAnimation) {
-          setReady(false);
+          setAnimationTimer(
+            setTimeout(() => {
+              newText = displayedText + char;
+              setDisplayedText(newText);
+            }, pauseTimeMS)
+          );
 
-          const timeoutID = setTimeout(() => {
-            newText = text + char;
-            setText(newText);
-            setReady(true);
-          }, pause);
-
-          setTimerID(timeoutID);
-          // console.log(`inicia actualizacion del timer: ${timer}`);
-
-          if (index < data.length) setIndex(index + 1);
+          if (letterIndex < data.length) setLetterIndex(letterIndex + 1);
         } else {
-          // replaceAll method is new, so is incompatible with older versions, use regexp instead
-
-          let newData = data.replace(/;/g, ". \n");
-          setText(newData);
+          skip();
         }
+      } else {
+        setSkipAnimation(true);
       }
     }
-    //eslint-disable-next-line
-  }, [ininitializer, text]);
+    // eslint-disable-next-line
+  }, [displayedText]);
 
-  const handleClick = () => {
+  const handleSkip = () => {
     setSkipAnimation(true);
-    clearTimeout(timerID);
-    let newData = data.replace(/;/g, ". \n");
-    setText(newData);
+    skip();
   };
 
   const handleReset = () => {
-    setText("");
-    setIndex(0);
-    setPause(20);
+    setDisplayedText("");
+    setLetterIndex(0);
+    setPauseTimeMS(20);
     setSkipAnimation(false);
   };
 
-  const [line, setLine] = useState(1);
+  //Highlight Line ------------------------------------------
+
+  const [linePosition, setLinePosition] = useState(0);
 
   useEffect(() => {
-    if (text) {
-      let p = document.querySelector("p");
-      let words = p.textContent.split(" ");
-      let text = "";
+    if (displayedText) {
+      const p = textRef.current;
 
-      words.forEach((word) => {
-        text = text + "<span>" + word + "</span> ";
-      });
+      const lineHeight = 24;
+      let height = p.offsetHeight;
 
-      p.innerHTML = text;
-
-      const resize = () => {
-        let line = 0;
-        let prevTop = -15;
-
-        p.querySelectorAll("span").forEach((word) => {
-          let rect = word.getBoundingClientRect();
-          let win = word.ownerDocument.defaultView;
-
-          let top = rect.top + win.pageYOffset;
-
-          if (top !== prevTop) {
-            prevTop = top;
-            line++;
-          }
-
-          // word.setAttribute("class", "line" + line);
-        }); //each
-
-        setLine(line);
-      };
-
-      window.addEventListener("resize", resize); //resize
-
-      resize();
+      setLinePosition(height / lineHeight - 1);
     }
-  }, [text]);
+  }, [displayedText]);
+
+  //Numbers -----------------------------------
 
   const [numbers, setNumbers] = useState([]);
 
   useEffect(() => {
-    setNumbers(Array.from({ length: line }, (_, i) => i + 1));
-  }, [line]);
-
-  const [loader, setLoader] = useState("/");
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (loader === "/") setLoader("\\");
-      else setLoader("/");
-    }, 200);
-  }, [loader]);
+    setNumbers(Array.from({ length: linePosition + 1 }, (nothing, i) => i + 1));
+  }, [linePosition]);
 
   return (
-    <>
-      <div
-        className={
-          // index !== data.length
-          //   ? skipAnimation
-          //     ? "editor"
-          //     : "editor active"
-          //   : "editor"
-          "editor"
-        }
-      >
-        <div className="tab">
-          <div className="line-numbers">
-            {numbers.map((num) => {
-              return (
-                <span className="number" key={num}>
-                  {num}
-                </span>
-              );
-            })}
-          </div>
-          <div className="text-container">
-            {/* {text.split("\n").map((str, index) => (
-              <p key={index}>{str}</p>
-            ))} */}
-            <div
-              className="highlight"
-              style={{
-                transform: `translateY(${(line - 1) * 23}px)`,
-              }}
-            ></div>
-            <p className="text">{text}</p>
-          </div>
+    <div className="editor">
+      <div className="tab">
+        <LogoMD />
+        <p>bio.md</p>
+      </div>
+      <div className="code">
+        <div className="line-numbers">
+          {numbers.map((num) => {
+            return (
+              <span className="number" key={num}>
+                {num}
+              </span>
+            );
+          })}
         </div>
-        <div className="console">
-          <ul className="tabs">
-            <li>Problems</li>
-            <li>Output</li>
-            <li>Terminal</li>
-            <li>Debug</li>
-          </ul>
+        <div className="text-container">
           <div
-            className="text-container"
-            onClick={
-              index !== data.length
-                ? skipAnimation
-                  ? handleReset
-                  : handleClick
-                : handleReset
-            }
-          >
-            {index !== data.length ? (
-              !skipAnimation ? (
-                <>
-                  <span>event</span>
-                  <p>- running animation... {loader}</p>
-                  <span>info</span>
-                  <p>- click or tap here to skip the animation</p>
-                </>
-              ) : (
-                <>
-                  <span>event</span>
-                  <p>- animation finished</p>
-                  <span>info</span>
-                  <p>- click or tap here to replay the animation</p>
-                </>
-              )
-            ) : (
-              <>
-                <span>event</span>
-                <p>- animation finished</p>
-                <span>info</span>
-                <p>- click or tap here to replay the animation</p>
-              </>
-            )}
-          </div>
+            className="highlight"
+            style={{
+              transform: `translateY(${linePosition * 24}px)`,
+            }}
+          ></div>
+          <p className="text" ref={textRef}>
+            {displayedText}
+            <span></span>
+          </p>
         </div>
       </div>
-      {/* <button
-        onClick={(e) => {
-          handleReset();
-          e.target.classList.add("loading");
-        }}
-        className={ready ? undefined : "yes"}
-      >
-        {ready ? "Reset" : "Skip Animation"}
-      </button> */}
-    </>
+      <div className="console">
+        <div
+          className="text-container"
+          onClick={skipAnimation ? handleReset : handleSkip}
+        >
+          {!skipAnimation ? (
+            <>
+              <p>running animation... {loader}</p>
+            </>
+          ) : (
+            <>
+              <p>animation finished</p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

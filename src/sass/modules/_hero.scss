@@ -51,8 +51,8 @@
         }
 
         h1 {
-          font-size: 72px;
-          line-height: 80px;
+          font-size: 4.5rem;
+          line-height: 5rem;
           margin-bottom: 0.5rem;
         }
 
@@ -74,10 +74,11 @@
             justify-content: center;
             align-items: center;
 
-            height: 48px;
+            height: 3rem;
             padding: 0 1rem;
 
-            border: 2px solid var(--dark-blue);
+            border: 0.125rem solid var(--dark-blue);
+            border-radius: 0.5rem;
             background-color: transparent;
 
             cursor: pointer;
@@ -87,10 +88,10 @@
             transition-timing-function: ease-in-out;
 
             svg {
-              height: 24px;
+              height: 1.5rem;
               margin-right: 0.5rem;
               fill: #fff;
-              transform: translateY(-2px);
+              transform: translateY(-0.125rem);
               transition: fill 0.2s ease-in-out;
             }
 
@@ -177,8 +178,8 @@
             transition: background-color 0.2s ease-in-out;
 
             svg {
-              height: 24px;
-              width: 24px;
+              height: 1.5rem;
+              width: 1.5rem;
               fill: var(--dark-blue);
 
               transition: fill 0.2s ease-in-out;

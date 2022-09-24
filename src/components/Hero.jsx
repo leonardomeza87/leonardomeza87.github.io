@@ -15,9 +15,9 @@ const Hero = () => {
       <div className="container">
         <div className="inner-container">
           <div className="text">
-            <p>Frontend web development solutions</p>
+            <p>Frontend web developer</p>
             <h1>Leonardo Meza</h1>
-            <span>At your service! (⸃ ◡ ⸂)</span>
+            <span>At your service!</span>
             <div className="cta">
               <a
                 href="http://www.google.com"

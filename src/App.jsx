@@ -14,9 +14,10 @@ function App() {
         <Header />
         <Hero />
         <About />
-        <Projects />
-        <Contact />
-        <Footer />
+        <span style={{ marginLeft: "1rem" }}>Still in construction ~</span>
+        {/* <Projects /> */}
+        {/* <Contact /> */}
+        {/* <Footer /> */}
       </div>
     </div>
   );

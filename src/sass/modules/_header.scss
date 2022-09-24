@@ -53,8 +53,13 @@ header {
           transform: scaleX(-1);
         }
 
-        img {
-          height: 1.1875rem;
+        strong {
+          font-family: "Rubik", sans-serif;
+
+          font-size: var(--f-regular-l);
+          line-height: var(--f-regular-l);
+          font-weight: 300;
+          color: var(--dark-blue);
         }
       }
 
